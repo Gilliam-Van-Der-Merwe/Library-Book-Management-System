@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://orderManagementBrowse.caption"
+        focusComponent="orderManagementsTable"
+        messagesPack="com.company.library.web.screens.ordermanagement">
+    <data readOnly="true">
+        <collection id="orderManagementsDc"
+                    class="com.company.library.order_management.OrderManagement">
+            <view extends="_local"/>
+            <loader id="orderManagementsDl">
+                <query>
+                    <![CDATA[select e from library_OrderManagement e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="orderManagementsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="orderManagementsTable"
+                dataLoader="orderManagementsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="orderManagementsTable"
+                    width="100%"
+                    dataContainer="orderManagementsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="refresh" type="refresh"/>
+            </actions>
+            <columns>
+                <column id="orderTitle"/>
+                <column id="orderISBN"/>
+                <column id="orderQuantity"/>
+                <column id="orderSupplier"/>
+                <column id="orderDatePlaced"/>
+                <column id="order_date_received"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="orderManagementsTable.create"/>
+                <button id="editBtn" action="orderManagementsTable.edit"/>
+                <button id="removeBtn" action="orderManagementsTable.remove"/>
+                <button id="refreshBtn" action="orderManagementsTable.refresh"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

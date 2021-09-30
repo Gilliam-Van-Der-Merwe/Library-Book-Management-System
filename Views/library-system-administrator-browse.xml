@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://librarySystemAdministratorBrowse.caption"
+        focusComponent="librarySystemAdministratorsTable"
+        messagesPack="com.company.library.web.screens.librarysystemadministrator">
+    <data readOnly="true">
+        <collection id="librarySystemAdministratorsDc"
+                    class="com.company.library.library_system_administrator.LibrarySystemAdministrator">
+            <view extends="_local"/>
+            <loader id="librarySystemAdministratorsDl">
+                <query>
+                    <![CDATA[select e from library_LibrarySystemAdministrator e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="librarySystemAdministratorsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="librarySystemAdministratorsTable"
+                dataLoader="librarySystemAdministratorsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="librarySystemAdministratorsTable"
+                    width="100%"
+                    dataContainer="librarySystemAdministratorsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="refresh" type="refresh"/>
+            </actions>
+            <columns>
+                <column id="adminName"/>
+                <column id="adminSurname"/>
+                <column id="adminBirthDate"/>
+                <column id="adminPhoneNumber"/>
+                <column id="adminEmailAddress"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="librarySystemAdministratorsTable.create"/>
+                <button id="editBtn" action="librarySystemAdministratorsTable.edit"/>
+                <button id="removeBtn" action="librarySystemAdministratorsTable.remove"/>
+                <button id="refreshBtn" action="librarySystemAdministratorsTable.refresh"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

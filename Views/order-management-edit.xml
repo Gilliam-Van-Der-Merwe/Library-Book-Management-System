@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://orderManagementEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.library.web.screens.ordermanagement">
+    <data>
+        <instance id="orderManagementDc"
+                  class="com.company.library.order_management.OrderManagement">
+            <view extends="_local">
+                <property name="orderID" view="_minimal"/>
+            </view>
+            <loader/>
+            <collection id="orderIDDc" property="orderID"/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="orderManagementDc">
+            <column width="350px">
+                <textField id="orderTitleField" property="orderTitle"/>
+                <textField id="orderISBNField" property="orderISBN"/>
+                <textField id="orderQuantityField" property="orderQuantity"/>
+                <textField id="orderSupplierField" property="orderSupplier"/>
+                <dateField id="orderDatePlacedField" property="orderDatePlaced"/>
+                <dateField id="order_date_receivedField" property="order_date_received"/>
+            </column>
+        </form>
+        <groupBox id="orderIDBox" caption="Books Ordered:">
+            <table id="orderIDTable" dataContainer="orderIDDc" width="100%" height="200px">
+                <actions>
+                    <action id="add" type="add"/>
+                    <action id="exclude" type="exclude"/>
+                </actions>
+                <columns>
+                    <column id="bookTitle"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="orderIDTable.add"/>
+                    <button action="orderIDTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

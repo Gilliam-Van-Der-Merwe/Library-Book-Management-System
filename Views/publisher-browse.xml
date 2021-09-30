@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://publisherBrowse.caption"
+        focusComponent="publishersTable"
+        messagesPack="com.company.library.web.screens.publisher">
+    <data readOnly="true">
+        <collection id="publishersDc"
+                    class="com.company.library.publisher.Publisher">
+            <view extends="_local"/>
+            <loader id="publishersDl">
+                <query>
+                    <![CDATA[select e from library_Publisher e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="publishersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="publishersTable"
+                dataLoader="publishersDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="publishersTable"
+                    width="100%"
+                    dataContainer="publishersDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="refresh" type="refresh"/>
+            </actions>
+            <columns>
+                <column id="publisherName"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="publishersTable.create"/>
+                <button id="editBtn" action="publishersTable.edit"/>
+                <button id="removeBtn" action="publishersTable.remove"/>
+                <button id="refreshBtn" action="publishersTable.refresh"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

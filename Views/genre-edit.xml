@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://genreEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.library.web.screens.genre">
+    <data>
+        <instance id="genreDc"
+                  class="com.company.library.genre.Genre">
+            <view extends="_local">
+                <property name="genreID" view="_minimal"/>
+            </view>
+            <loader/>
+            <collection id="genreIDDc" property="genreID"/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="genreDc">
+            <column width="350px">
+                <textField id="genreTypeField" property="genreType"/>
+                <textField id="genreBookQuantityField" property="genreBookQuantity"/>
+            </column>
+        </form>
+        <groupBox id="genreIDBox" caption="Books in this genre:">
+            <table id="genreIDTable" dataContainer="genreIDDc" width="100%" height="200px">
+                <actions>
+                    <action id="add" type="add"/>
+                    <action id="exclude" type="exclude"/>
+                </actions>
+                <columns>
+                    <column id="bookTitle"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="genreIDTable.add"/>
+                    <button action="genreIDTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://membershipManagementBrowse.caption"
+        focusComponent="membershipManagementsTable"
+        messagesPack="com.company.library.web.screens.membershipmanagement">
+    <data readOnly="true">
+        <collection id="membershipManagementsDc"
+                    class="com.company.library.membership_management.MembershipManagement">
+            <view extends="_local"/>
+            <loader id="membershipManagementsDl">
+                <query>
+                    <![CDATA[select e from library_MembershipManagement e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="membershipManagementsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="membershipManagementsTable"
+                dataLoader="membershipManagementsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="membershipManagementsTable"
+                    width="100%"
+                    dataContainer="membershipManagementsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="refresh" type="refresh"/>
+            </actions>
+            <columns>
+                <column id="memberName"/>
+                <column id="memberSurname"/>
+                <column id="memberBirthdate"/>
+                <column id="memberPhoneNumber"/>
+                <column id="memberEmailAddress"/>
+                <column id="borrowStatus"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="membershipManagementsTable.create"/>
+                <button id="editBtn" action="membershipManagementsTable.edit"/>
+                <button id="removeBtn" action="membershipManagementsTable.remove"/>
+                <button id="refreshBtn" action="membershipManagementsTable.refresh"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

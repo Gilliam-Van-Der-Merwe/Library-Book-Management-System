@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://librarySystemAdministratorEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.library.web.screens.librarysystemadministrator">
+    <data>
+        <instance id="librarySystemAdministratorDc"
+                  class="com.company.library.library_system_administrator.LibrarySystemAdministrator">
+            <view extends="_local">
+                <property name="adminID" view="_minimal">
+                    <property name="bookID"/>
+                </property>
+            </view>
+            <loader/>
+            <collection id="adminIDDc" property="adminID"/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="librarySystemAdministratorDc">
+            <column width="350px">
+                <textField id="adminNameField" property="adminName"/>
+                <textField id="adminSurnameField" property="adminSurname"/>
+                <dateField id="adminBirthDateField" property="adminBirthDate"/>
+                <textField id="adminPhoneNumberField" property="adminPhoneNumber"/>
+                <textField id="adminEmailAddressField" property="adminEmailAddress"/>
+            </column>
+        </form>
+        <groupBox id="adminIDBox"
+                  caption="Admin's Book Records: ">
+            <table id="adminIDTable" dataContainer="adminIDDc" width="100%" height="200px">
+                <actions>
+                    <action id="add" type="add"/>
+                    <action id="exclude" type="exclude"/>
+                </actions>
+                <columns>
+                    <column id="bookTitle"/>
+                    <column id="bookID"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="adminIDTable.add"/>
+                    <button action="adminIDTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

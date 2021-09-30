@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://reservationManagementBrowse.caption"
+        focusComponent="reservationManagementsTable"
+        messagesPack="com.company.library.web.screens.reservationmanagement">
+    <data readOnly="true">
+        <collection id="reservationManagementsDc"
+                    class="com.company.library.reservation_management.ReservationManagement">
+            <view extends="_local">
+                <property name="reservationID" view="_minimal">
+                    <property name="memberName"/>
+                    <property name="memberSurname"/>
+                    <property name="memberBirthdate"/>
+                    <property name="memberPhoneNumber"/>
+                    <property name="memberEmailAddress"/>
+                </property>
+            </view>
+            <loader id="reservationManagementsDl">
+                <query>
+                    <![CDATA[select e from library_ReservationManagement e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="reservationManagementsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="reservationManagementsTable"
+                dataLoader="reservationManagementsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="reservationManagementsTable"
+                    width="100%"
+                    dataContainer="reservationManagementsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="refresh" type="refresh"/>
+            </actions>
+            <columns>
+                <column id="reservationBookTitle"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="reservationManagementsTable.create"/>
+                <button id="editBtn" action="reservationManagementsTable.edit"/>
+                <button id="removeBtn" action="reservationManagementsTable.remove"/>
+                <button id="refreshBtn" action="reservationManagementsTable.refresh"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
